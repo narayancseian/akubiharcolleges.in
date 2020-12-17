@@ -1,0 +1,58 @@
+<?php
+$servername='148.72.232.176:3306';
+$username='login_and_signup';
+$password='Abhi84200@1';
+$dbname = "dball";
+
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+if(isset($_POST['submit']))
+{
+$email = $_POST['email'];
+$sql = "SELECT password FROM usertable where email='$email'";
+$result = $conn->query($sql);
+$to = $email;
+$subject = "Reset your password on examplesite.com";
+$msg = "Hi there, use this password";
+ 
+$headers = "From: akubiharcollege@gmail.com";
+mail($to, $subject, $msg, $headers);
+if($result){
+    mail($to, $subject, $msg, $headers);
+    echo "<h1>Message Sent Successfully! Thank you";
+
+}
+}
+?>
+<!DOCTYPE HTML>
+<html>
+<head>
+<style type="text/css">
+ input{
+ border:1px solid olive;
+ border-radius:5px;
+ }
+ h1{
+  color:darkgreen;
+  font-size:22px;
+  text-align:center;
+ }
+
+</style>
+</head>
+<body>
+<h1>Forgot Password<h1>
+<form action='' method='post'>
+<table cellspacing='5' align='center'>
+<tr><td>user id:</td><td><input type='email' name='email'/></td></tr>
+<tr><td></td><td><input type='submit' name='submit' value='Submit'/></td></tr>
+</table>
+</form>
+</body>
+</html>
+
+
